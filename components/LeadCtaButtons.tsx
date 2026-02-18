@@ -86,21 +86,29 @@ export default function LeadCtaButtons({ phoneRaw, phonePretty, address, mapsHre
   return (
     <>
       {/* HERO CTA (как было) */}
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          onClick={() => setOpen(true)}
-          className="inline-flex items-center justify-center rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800"
-        >
-          Оставить заявку
-        </button>
+      <div className="mt-7">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <button
+      onClick={() => setOpen(true)}
+      className="inline-flex items-center justify-center rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800"
+    >
+      Записаться на диагностику
+    </button>
 
-        <a
-          href={`tel:${phoneRaw}`}
-          className="inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
-        >
-          Позвонить: {phonePretty}
-        </a>
-      </div>
+    <a
+      href="#app"
+      className="inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
+    >
+      Посмотреть приложение (30 сек)
+    </a>
+  </div>
+
+  <p className="mt-2 text-xs text-white/60">
+  Смета — после дефектовки. Без навязываний.
+</p>
+
+</div>
+
 
       {/* STICKY BAR (только мобилка) */}
       <div className="fixed inset-x-0 bottom-0 z-[90] sm:hidden">

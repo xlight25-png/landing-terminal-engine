@@ -139,7 +139,8 @@ function ImgFill({
 
 export default function Page() {
   return (
-   <main className="min-h-screen bg-zinc-50 text-zinc-900 pb-24 sm:pb-0">
+  <main className="min-h-[72vh] md:min-h-screen pt-12 md:pt-24 pb-10 md:pb-16">
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
@@ -200,11 +201,10 @@ export default function Page() {
               <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
                 Капремонт двигателя с онлайн-контролем этапов
               </h1>
-              <p className="mt-4 max-w-xl text-pretty text-sm text-zinc-600 sm:text-base">
-                Вы видите весь процесс ремонта в приложении: статусы, медиа по
-                дефектам, список запчастей и сроки. Прозрачно — как заказ пиццы,
-                только про двигатель.
-              </p>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/70">
+  Вы видите весь процесс ремонта в приложении: статусы, медиа по дефектам, список запчастей и сроки.
+  Прозрачно — как заказ пиццы, только про двигатель.
+</p>
 
              <LeadCtaButtons
   phoneRaw={PHONE_RAW}
@@ -214,28 +214,24 @@ export default function Page() {
 />
 
 
-              <div className="mt-6 grid gap-3 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm sm:grid-cols-2">
-                <div>
-                  <div className="text-xs text-zinc-600">Телефон</div>
-                  <a
-                    className="text-sm font-semibold hover:underline"
-                    href={`tel:${PHONE_RAW}`}
-                  >
-                    {PHONE_PRETTY}
-                  </a>
-                </div>
-                <div>
-                  <div className="text-xs text-zinc-600">Адрес</div>
-                  <a
-                    className="text-sm font-semibold hover:underline"
-                    href={MAPS_HREF}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {ADDRESS}
-                  </a>
-                </div>
-              </div>
+              <div className="mt-8 rounded-2xl bg-white/95 p-5 text-zinc-900">
+  <div className="grid grid-cols-2 gap-6">
+    <div>
+      <div className="text-xs text-zinc-500">Телефон</div>
+      <a href="tel:+79049724641" className="mt-1 block text-sm font-semibold text-zinc-900">
+        +7 (904) 972-46-41
+      </a>
+    </div>
+
+    <div>
+      <div className="text-xs text-zinc-500">Адрес</div>
+      <div className="mt-1 text-sm font-semibold text-zinc-900">
+        Челябинск, Запорожская 8
+      </div>
+    </div>
+  </div>
+</div>
+
             </div>
 
             <div className="relative">
@@ -252,20 +248,19 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
-                    <div className="text-xs text-zinc-600">Ключевая фишка</div>
-                    <div className="mt-1 text-sm font-semibold">
-                      Прозрачность: этапы + медиа + запчасти
-                    </div>
-                  </div>
-                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
-                    <div className="text-xs text-zinc-600">Гарантия</div>
-                    <div className="mt-1 text-sm font-semibold">
-                      6 месяцев или 10 000 км
-                    </div>
-                  </div>
-                </div>
+                <div className="rounded-2xl border border-zinc-200 bg-white/95 p-4 text-zinc-900">
+  <div className="text-xs text-zinc-500">Ключевая фишка</div>
+  <div className="mt-1 text-sm font-semibold text-zinc-900">
+    Прозрачность: этапы + медиа + запчасти
+  </div>
+</div>
+
+<div className="rounded-2xl border border-zinc-200 bg-white/95 p-4 text-zinc-900">
+  <div className="text-xs text-zinc-500">Гарантия</div>
+  <div className="mt-1 text-sm font-semibold text-zinc-900">
+    6 месяцев или 10 000 км
+  </div>
+</div>
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -283,7 +278,7 @@ export default function Page() {
         title="Почему так спокойнее"
         subtitle="Капремонт — это всегда про доверие. Мы снимаем нерв за счёт прозрачности и фиксированных правил."
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 text-zinc-900 md:grid-cols-2 lg:grid-cols-3">
           <Card
             icon="📷"
             title="Фото и видео дефектовки"
@@ -323,7 +318,7 @@ export default function Page() {
         title="Как выглядит приложение"
         subtitle="Лучше реальные скрины (даже 2–3 штуки сильно поднимают доверие)."
       >
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 text-zinc-900 lg:grid-cols-3">
           {[
             {
               src: IMG.app1,
@@ -370,7 +365,7 @@ export default function Page() {
         title="Этапы работы"
         subtitle="Понятный процесс, чтобы вы заранее понимали, что и когда происходит."
       >
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 text-zinc-900 lg:grid-cols-2">
           {[
             {
               n: "01",
@@ -426,7 +421,7 @@ export default function Page() {
         title="Примеры кейсов"
         subtitle="Позже заменим заглушки на реальные: марка/двигатель, симптомы, что нашли, что сделали, итог."
       >
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 text-zinc-900 lg:grid-cols-3">
           {[
             {
               t: "Кейс 1 — стук/масложор",
@@ -469,7 +464,7 @@ export default function Page() {
         title="Стоимость"
         subtitle="Точную цену честно можно назвать только после дефектовки. Но мы заранее объясняем, что влияет на смету."
       >
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 text-zinc-900 lg:grid-cols-2">
           <div className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
             <div className="text-xs text-zinc-600">Подход</div>
             <div className="mt-2 text-lg font-semibold">
@@ -599,15 +594,16 @@ export default function Page() {
 
             <div className="rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm">
               <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50">
-                <iframe
-                  title="Карта"
-                  src={
-                    "https://yandex.ru/map-widget/v1/?text=" +
-                    encodeURIComponent("Челябинск Запорожская 8")
-                  }
-                  className="h-[360px] w-full"
-                  loading="lazy"
-                />
+               
+<iframe
+  src="https://yandex.ru/map-widget/v1/?ll=61.382234%2C55.248760&z=16&pt=61.382234%2C55.248760%2Cpm2rdm"
+  width="100%"
+  height="320"
+  style={{ border: 0 }}
+  loading="lazy"
+/>
+
+
               </div>
               <p className="mt-3 text-xs text-zinc-500">
                 Если виджет не загрузится — откройте карту по ссылке в адресе выше.
