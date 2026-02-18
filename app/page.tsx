@@ -519,7 +519,7 @@ export default function Page() {
 
       {/* FAQ */}
       <Section id="faq" title="FAQ" subtitle="Коротко и по делу — чтобы не было неопределённости.">
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 text-zinc-900 lg:grid-cols-2">
           <FAQItem
             q="Какая гарантия на капремонт?"
             a="Гарантия 6 месяцев или 10 000 км пробега. Условия прозрачные, обсуждаем при оформлении."
@@ -550,7 +550,7 @@ export default function Page() {
       {/* Contacts */}
       <section className="border-t border-zinc-200 bg-white py-14">
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-6 text-zinc-900 lg:grid-cols-2 lg:items-center">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                 Контакты
