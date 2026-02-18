@@ -1,5 +1,8 @@
 // app/page.tsx
 import type { Metadata } from "next";
+import Image from "next/image";
+import type { ReactNode } from "react";
+import LeadCtaButtons from "@/components/LeadCtaButtons";
 
 export const metadata: Metadata = {
   title: "Терминал — капремонт двигателя в Челябинске с онлайн-контролем",
@@ -11,10 +14,18 @@ const PHONE_RAW = "+79049724641";
 const PHONE_PRETTY = "+7 (904) 972-46-41";
 const ADDRESS = "Челябинск, Запорожская 8";
 
-// Можно заменить на точную ссылку Яндекс.Карт позже.
-// Сейчас это безопасный вариант “поиск по адресу”.
 const MAPS_HREF =
   "https://yandex.ru/maps/?text=" + encodeURIComponent("Челябинск Запорожская 8");
+
+// === Пути к картинкам (поменяй здесь, если названия другие) ===
+const IMG = {
+  hero: "/images/hero.webp",
+  workshop1: "/images/workshop-1.webp",
+  workshop2: "/images/workshop-2.webp",
+  app1: "/images/app-1.webp",
+  app2: "/images/app-2.webp",
+  app3: "/images/app-3.webp",
+};
 
 function Section({
   id,
@@ -25,7 +36,7 @@ function Section({
   id?: string;
   title?: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section id={id} className="py-14 sm:py-16">
@@ -50,7 +61,7 @@ function Section({
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
+function Badge({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-700 shadow-sm">
       {children}
@@ -101,9 +112,34 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function ImgFill({
+  src,
+  alt,
+  priority,
+  sizes,
+  className,
+}: {
+  src: string;
+  alt: string;
+  priority?: boolean;
+  sizes: string;
+  className?: string;
+}) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      className={className ?? "object-cover"}
+    />
+  );
+}
+
 export default function Page() {
   return (
-    <main className="min-h-screen bg-zinc-50 text-zinc-900">
+   <main className="min-h-screen bg-zinc-50 text-zinc-900 pb-24 sm:pb-0">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
@@ -113,7 +149,9 @@ export default function Page() {
             </div>
             <div className="leading-tight">
               <div className="text-sm font-semibold">Терминал</div>
-              <div className="text-xs text-zinc-600">Капремонт двигателя • Челябинск</div>
+              <div className="text-xs text-zinc-600">
+                Капремонт двигателя • Челябинск
+              </div>
             </div>
           </div>
 
@@ -163,35 +201,37 @@ export default function Page() {
                 Капремонт двигателя с онлайн-контролем этапов
               </h1>
               <p className="mt-4 max-w-xl text-pretty text-sm text-zinc-600 sm:text-base">
-                Вы видите весь процесс ремонта в приложении: статусы, медиа по дефектам,
-                список запчастей и сроки. Прозрачно — как заказ пиццы, только про двигатель.
+                Вы видите весь процесс ремонта в приложении: статусы, медиа по
+                дефектам, список запчастей и сроки. Прозрачно — как заказ пиццы,
+                только про двигатель.
               </p>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href={`tel:${PHONE_RAW}`}
-                  className="inline-flex items-center justify-center rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:bg-zinc-800"
-                >
-                  Записаться на диагностику
-                </a>
-                <a
-                  href="#app"
-                  className="inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
-                >
-                  Посмотреть, как выглядит приложение
-                </a>
-              </div>
+             <LeadCtaButtons
+  phoneRaw={PHONE_RAW}
+  phonePretty={PHONE_PRETTY}
+  address={ADDRESS}
+  mapsHref={MAPS_HREF}
+/>
+
 
               <div className="mt-6 grid gap-3 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm sm:grid-cols-2">
                 <div>
                   <div className="text-xs text-zinc-600">Телефон</div>
-                  <a className="text-sm font-semibold hover:underline" href={`tel:${PHONE_RAW}`}>
+                  <a
+                    className="text-sm font-semibold hover:underline"
+                    href={`tel:${PHONE_RAW}`}
+                  >
                     {PHONE_PRETTY}
                   </a>
                 </div>
                 <div>
                   <div className="text-xs text-zinc-600">Адрес</div>
-                  <a className="text-sm font-semibold hover:underline" href={MAPS_HREF} target="_blank" rel="noreferrer">
+                  <a
+                    className="text-sm font-semibold hover:underline"
+                    href={MAPS_HREF}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {ADDRESS}
                   </a>
                 </div>
@@ -201,13 +241,17 @@ export default function Page() {
             <div className="relative">
               <div className="rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm">
                 <div className="overflow-hidden rounded-2xl">
-                  {/* Поменяй картинку на реальную */}
-                  <img
-                    src="/images/workshop-1.jpg"
-                    alt="Терминал — ремонт двигателя"
-                    className="h-[320px] w-full object-cover sm:h-[420px]"
-                  />
+                  <div className="relative h-[320px] w-full sm:h-[420px]">
+                    <ImgFill
+                      src={IMG.hero}
+                      alt="Терминал — ремонт двигателя"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
+
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
                     <div className="text-xs text-zinc-600">Ключевая фишка</div>
@@ -217,7 +261,9 @@ export default function Page() {
                   </div>
                   <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
                     <div className="text-xs text-zinc-600">Гарантия</div>
-                    <div className="mt-1 text-sm font-semibold">6 месяцев или 10 000 км</div>
+                    <div className="mt-1 text-sm font-semibold">
+                      6 месяцев или 10 000 км
+                    </div>
                   </div>
                 </div>
               </div>
@@ -275,17 +321,39 @@ export default function Page() {
       <Section
         id="app"
         title="Как выглядит приложение"
-        subtitle="Здесь лучше вставить реальные скрины (даже 2–3 штуки уже сильно повышают доверие)."
+        subtitle="Лучше реальные скрины (даже 2–3 штуки сильно поднимают доверие)."
       >
         <div className="grid gap-4 lg:grid-cols-3">
           {[
-            { src: "/images/app-1.png", title: "Этапы ремонта", desc: "Понятный статус, что сейчас происходит." },
-            { src: "/images/app-2.png", title: "Медиа по дефектам", desc: "Фото/видео и комментарии мастера." },
-            { src: "/images/app-3.png", title: "Запчасти и сроки", desc: "Что заказано и когда будет." },
+            {
+              src: IMG.app1,
+              title: "Этапы ремонта",
+              desc: "Понятный статус, что сейчас происходит.",
+            },
+            {
+              src: IMG.app2,
+              title: "Медиа по дефектам",
+              desc: "Фото/видео и комментарии мастера.",
+            },
+            {
+              src: IMG.app3,
+              title: "Запчасти и сроки",
+              desc: "Что заказано и когда будет.",
+            },
           ].map((x) => (
-            <div key={x.src} className="rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm">
+            <div
+              key={x.src}
+              className="rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm"
+            >
               <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50">
-                <img src={x.src} alt={x.title} className="h-[260px] w-full object-cover sm:h-[320px]" />
+                <div className="relative h-[260px] w-full sm:h-[320px]">
+                  <ImgFill
+                    src={x.src}
+                    alt={x.title}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
               <div className="p-4">
                 <div className="text-sm font-semibold">{x.title}</div>
@@ -335,7 +403,10 @@ export default function Page() {
               d: "Финальный контроль, рекомендации по обкатке, гарантия 6 мес / 10 000 км.",
             },
           ].map((s) => (
-            <div key={s.n} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+            <div
+              key={s.n}
+              className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
+            >
               <div className="flex items-start gap-4">
                 <div className="rounded-xl bg-zinc-900 px-3 py-2 text-xs font-semibold text-white">
                   {s.n}
@@ -353,7 +424,7 @@ export default function Page() {
       {/* Cases */}
       <Section
         title="Примеры кейсов"
-        subtitle="Здесь потом добавим реальные: марка/двигатель, симптомы, что нашли, что сделали, итог."
+        subtitle="Позже заменим заглушки на реальные: марка/двигатель, симптомы, что нашли, что сделали, итог."
       >
         <div className="grid gap-4 lg:grid-cols-3">
           {[
@@ -370,15 +441,22 @@ export default function Page() {
               d: "Симптомы → замеры → дефектовка → ремонт → гарантия.",
             },
           ].map((c) => (
-            <div key={c.t} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+            <div
+              key={c.t}
+              className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
+            >
               <div className="text-sm font-semibold">{c.t}</div>
               <p className="mt-2 text-sm text-zinc-600">{c.d}</p>
+
               <div className="mt-4 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50">
-                <img
-                  src="/images/workshop-2.jpg"
-                  alt="Фото из сервиса"
-                  className="h-40 w-full object-cover"
-                />
+                <div className="relative h-40 w-full">
+                  <ImgFill
+                    src={IMG.workshop2}
+                    alt="Фото из сервиса"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -394,14 +472,18 @@ export default function Page() {
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
             <div className="text-xs text-zinc-600">Подход</div>
-            <div className="mt-2 text-lg font-semibold">Сначала дефектовка → потом фиксируем смету</div>
+            <div className="mt-2 text-lg font-semibold">
+              Сначала дефектовка → потом фиксируем смету
+            </div>
             <p className="mt-3 text-sm text-zinc-600">
               После осмотра показываем медиа, список работ и запчастей. Любые изменения согласуются.
             </p>
 
             <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
               <div className="text-sm font-semibold">Гарантия</div>
-              <div className="mt-1 text-sm text-zinc-700">6 месяцев или 10 000 км пробега</div>
+              <div className="mt-1 text-sm text-zinc-700">
+                6 месяцев или 10 000 км пробега
+              </div>
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -434,7 +516,7 @@ export default function Page() {
             <Card
               icon="🕒"
               title="Сроки"
-              text="Сильно зависят от деталей и очереди работ. В приложении видно прогресс и ожидания."
+              text="Зависят от объёма работ и наличия деталей. В приложении видно прогресс и ожидания."
             />
           </div>
         </div>
@@ -461,7 +543,7 @@ export default function Page() {
           />
           <FAQItem
             q="Сколько длится ремонт?"
-            a="Зависит от объёма работ и наличия запчастей. После дефектовки мы дадим реалистичный прогноз, а в приложении видно прогресс."
+            a="Зависит от объёма работ и наличия запчастей. После дефектовки дадим прогноз, а в приложении видно прогресс."
           />
           <FAQItem
             q="Можно ли приехать и обсудить на месте?"
@@ -475,21 +557,32 @@ export default function Page() {
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Контакты</h2>
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                Контакты
+              </h2>
               <p className="mt-3 max-w-xl text-sm text-zinc-600 sm:text-base">
-                Запишем на диагностику, ответим по симптомам и объясним процесс. Чем точнее описываете проблему — тем быстрее сориентируем.
+                Запишем на диагностику, ответим по симптомам и объясним процесс. Чем
+                точнее описываете проблему — тем быстрее сориентируем.
               </p>
 
               <div className="mt-6 grid gap-3 rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
                 <div>
                   <div className="text-xs text-zinc-600">Телефон</div>
-                  <a className="text-base font-semibold hover:underline" href={`tel:${PHONE_RAW}`}>
+                  <a
+                    className="text-base font-semibold hover:underline"
+                    href={`tel:${PHONE_RAW}`}
+                  >
                     {PHONE_PRETTY}
                   </a>
                 </div>
                 <div>
                   <div className="text-xs text-zinc-600">Адрес</div>
-                  <a className="text-base font-semibold hover:underline" href={MAPS_HREF} target="_blank" rel="noreferrer">
+                  <a
+                    className="text-base font-semibold hover:underline"
+                    href={MAPS_HREF}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {ADDRESS}
                   </a>
                 </div>
@@ -513,6 +606,7 @@ export default function Page() {
                     encodeURIComponent("Челябинск Запорожская 8")
                   }
                   className="h-[360px] w-full"
+                  loading="lazy"
                 />
               </div>
               <p className="mt-3 text-xs text-zinc-500">
